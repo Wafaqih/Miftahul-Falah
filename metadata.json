@@ -1,0 +1,6 @@
+{
+  "name": "Pondok Pesantren Miftahul Falah",
+  "description": "Website Resmi Pondok Pesantren Miftahul Falah (miftahulfalah.my.id) - Lembaga Pendidikan Islam Terpadu, Tahfidz Al-Qur'an, dan Pengkajian Kitab Kuning.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
