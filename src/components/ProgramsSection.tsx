@@ -84,16 +84,6 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onSelectProgra
                   </div>
                 </div>
               </div>
-
-              {/* Card Action Buttons */}
-              <div className="p-6 pt-0">
-                <button
-                  onClick={() => setActiveModalProgram(program)}
-                  className="w-full py-2.5 px-4 bg-white hover:bg-stone-100 text-stone-800 text-xs font-bold rounded-xl border border-stone-300 transition-colors cursor-pointer text-center"
-                >
-                  Detail & Kurikulum
-                </button>
-              </div>
             </div>
           ))}
         </div>

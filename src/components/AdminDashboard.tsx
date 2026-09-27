@@ -796,8 +796,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                                 {item.registrationNumber}
                               </td>
                               <td className="py-3 px-4">
-                                <div className="font-bold text-stone-900">{item.fullName}</div>
-                                <div className="text-[10px] text-stone-400">NISN: {item.nisn || '-'}</div>
+                                <div className="flex items-center gap-2.5">
+                                  <div className="w-8 h-10 rounded-md border border-stone-200 bg-stone-100 overflow-hidden shrink-0 flex items-center justify-center">
+                                    {item.photoUrl ? (
+                                      <img src={item.photoUrl} alt="" className="w-full h-full object-cover" />
+                                    ) : (
+                                      <User className="w-4 h-4 text-stone-400" />
+                                    )}
+                                  </div>
+                                  <div>
+                                    <div className="font-bold text-stone-900">{item.fullName}</div>
+                                    <div className="text-[10px] text-stone-400">NISN: {item.nisn || '-'}</div>
+                                  </div>
+                                </div>
                               </td>
                               <td className="py-3 px-4">
                                 <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
@@ -1280,6 +1291,53 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
                       </button>
                     </div>
                   </form>
+
+                  {/* Social Media Reference Card */}
+                  <div className="mt-6 p-5 bg-gradient-to-r from-stone-900 to-stone-800 text-white rounded-2xl border border-stone-700 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <h4 className="font-bold text-xs uppercase tracking-wider text-stone-200">
+                          Kanal Media Sosial Resmi Santri Mifa
+                        </h4>
+                      </div>
+                      <a
+                        href="https://linktr.ee/PonpesMiftahulFalah"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[11px] text-emerald-400 hover:text-emerald-300 font-mono font-bold flex items-center gap-1"
+                      >
+                        <span>linktr.ee/PonpesMiftahulFalah</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs pt-1">
+                      <div className="p-2.5 bg-stone-950/60 rounded-xl border border-stone-800 flex items-center justify-between">
+                        <span className="text-stone-400">Instagram:</span>
+                        <a href="https://instagram.com/santri_mifa" target="_blank" rel="noopener noreferrer" className="font-bold text-pink-400 hover:underline">
+                          @santri_mifa
+                        </a>
+                      </div>
+                      <div className="p-2.5 bg-stone-950/60 rounded-xl border border-stone-800 flex items-center justify-between">
+                        <span className="text-stone-400">TikTok:</span>
+                        <a href="https://www.tiktok.com/@santri_mifa" target="_blank" rel="noopener noreferrer" className="font-bold text-cyan-400 hover:underline">
+                          @santri_mifa
+                        </a>
+                      </div>
+                      <div className="p-2.5 bg-stone-950/60 rounded-xl border border-stone-800 flex items-center justify-between">
+                        <span className="text-stone-400">Facebook:</span>
+                        <a href="https://facebook.com/PonpesMiftahulFalah" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-400 hover:underline">
+                          Miftahul Falah
+                        </a>
+                      </div>
+                      <div className="p-2.5 bg-stone-950/60 rounded-xl border border-stone-800 flex items-center justify-between">
+                        <span className="text-stone-400">YouTube:</span>
+                        <a href="https://youtube.com/@SantriMifaOfficial" target="_blank" rel="noopener noreferrer" className="font-bold text-red-400 hover:underline">
+                          Santri Mifa Official
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -1296,14 +1354,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose 
         <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-xs">
           <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-stone-200 relative animate-in fade-in zoom-in duration-200 max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between border-b border-stone-100 pb-3 mb-4">
-              <div>
-                <span className="text-[10px] font-mono text-emerald-800 font-bold uppercase block">Detail Berkas PSB</span>
-                <h3 className="text-lg font-bold text-stone-900">{viewingSantri.fullName}</h3>
-                <span className="text-xs font-mono text-stone-500">{viewingSantri.registrationNumber}</span>
+              <div className="flex items-center gap-3.5">
+                <div className="w-14 h-18 rounded-xl border-2 border-emerald-800/30 bg-stone-50 overflow-hidden shrink-0 flex items-center justify-center shadow-xs">
+                  {viewingSantri.photoUrl ? (
+                    <img src={viewingSantri.photoUrl} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="text-center p-1">
+                      <User className="w-6 h-6 text-stone-400 mx-auto" />
+                      <span className="text-[7px] font-mono font-bold text-stone-400 uppercase">3x4</span>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono text-emerald-800 font-bold uppercase block">Detail Berkas PSB</span>
+                  <h3 className="text-lg font-bold text-stone-900">{viewingSantri.fullName}</h3>
+                  <span className="text-xs font-mono text-stone-500">{viewingSantri.registrationNumber}</span>
+                </div>
               </div>
               <button
                 onClick={() => setViewingSantri(null)}
-                className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 flex items-center justify-center text-sm font-bold"
+                className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 flex items-center justify-center text-sm font-bold cursor-pointer"
               >
                 ✕
               </button>

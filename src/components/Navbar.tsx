@@ -10,10 +10,18 @@ import {
   Sparkles,
   Search,
   Lock,
-  MessageCircle
+  MessageCircle,
+  Instagram,
+  Youtube
 } from 'lucide-react';
 import { PESANTREN_INFO } from '../data/pesantrenData.ts';
 import { usePesantren } from '../context/PesantrenContext.tsx';
+
+const TikTokNavIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.96-4.48V8.75a8.16 8.16 0 0 0 4.81 1.56v-3.62z"/>
+  </svg>
+);
 
 interface NavbarProps {
   onOpenPsb: () => void;
@@ -76,11 +84,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Beranda', href: '#beranda' },
     { label: 'Profil & Kyai', href: '#profil' },
     { label: 'Program Pendidikan', href: '#program' },
-    { label: 'Biaya Mondok', href: '#biaya' },
     { label: 'Jadwal Santri', href: '#jadwal' },
     { label: 'Dewan Santri', href: '#dewan-santri' },
     { label: 'Kampus Sekitar', href: '#kampus-sekitar' },
     { label: 'Fasilitas', href: '#fasilitas' },
+    { label: 'Biaya Mondok', href: '#biaya' },
     { label: 'Warta & Berita', href: '#berita' },
     { label: 'FAQ', href: '#faq' },
   ];
@@ -152,6 +160,38 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 Cek Status PSB
               </button>
+
+              {/* Social Media Quick Links */}
+              <div className="hidden lg:flex items-center gap-2 pl-2 border-l border-emerald-800/60 text-emerald-400">
+                <a 
+                  href="https://instagram.com/santri_mifa" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-pink-300 transition-colors p-0.5"
+                  title="Instagram @santri_mifa"
+                >
+                  <Instagram className="w-3.5 h-3.5" />
+                </a>
+                <a 
+                  href="https://www.tiktok.com/@santri_mifa" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-cyan-300 transition-colors p-0.5"
+                  title="TikTok @santri_mifa"
+                >
+                  <TikTokNavIcon className="w-3.5 h-3.5" />
+                </a>
+                <a 
+                  href="https://www.youtube.com/@SantriMifaOfficial" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-red-400 transition-colors p-0.5"
+                  title="YouTube Santri Mifa Official"
+                >
+                  <Youtube className="w-3.5 h-3.5" />
+                </a>
+              </div>
+
               {onOpenAdmin && (
                 <button
                   onClick={onOpenAdmin}
@@ -347,6 +387,48 @@ export const Navbar: React.FC<NavbarProps> = ({
                   Portal Admin & Pengurus
                 </button>
               )}
+
+              {/* Mobile Social Media Links */}
+              <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
+                <span className="text-[11px] font-medium text-stone-500">Media Sosial:</span>
+                <div className="flex items-center gap-3">
+                  <a
+                    href="https://instagram.com/santri_mifa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1 text-pink-600 hover:text-pink-700"
+                    title="Instagram @santri_mifa"
+                  >
+                    <Instagram className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="https://www.tiktok.com/@santri_mifa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1 text-stone-800 hover:text-stone-950"
+                    title="TikTok @santri_mifa"
+                  >
+                    <TikTokNavIcon className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="https://youtube.com/@SantriMifaOfficial"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1 text-red-600 hover:text-red-700"
+                    title="YouTube Santri Mifa Official"
+                  >
+                    <Youtube className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="https://linktr.ee/PonpesMiftahulFalah"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold"
+                  >
+                    linktr.ee
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         )}

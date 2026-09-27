@@ -7,10 +7,25 @@ import {
   UserCheck, 
   PhoneCall, 
   Sparkles,
-  Users
+  Users,
+  Instagram,
+  Facebook,
+  Youtube
 } from 'lucide-react';
 import { usePesantren } from '../context/PesantrenContext.tsx';
 import { PESANTREN_INFO } from '../data/pesantrenData.ts';
+
+const TikTokIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.96-4.48V8.75a8.16 8.16 0 0 0 4.81 1.56v-3.62z"/>
+  </svg>
+);
+
+const LinktreeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M13.736 5.853l4.005-4.117 2.325 2.38-4.2 4.007h5.908v3.305h-5.937l4.229 4.108-2.325 2.38-4.005-4.117v7.974h-3.473v-7.974l-4.005 4.117-2.325-2.38 4.229-4.108h-5.937v-3.305h5.908l-4.2-4.007 2.325-2.38 4.005 4.117v-5.853h3.473v5.853z"/>
+  </svg>
+);
 
 interface ContactWhatsAppModalProps {
   isOpen: boolean;
@@ -118,8 +133,64 @@ export const ContactWhatsAppModal: React.FC<ContactWhatsAppModalProps> = ({ isOp
 
         </div>
 
-        <div className="mt-5 text-center text-[11px] text-stone-400 border-t border-stone-100 pt-3">
-          Layanan chat aktif setiap hari pada jam operasional sekretariat (07.30 - 21.00 WIB).
+        {/* Official Social Media Channels (Singkat) */}
+        <div className="mt-4 pt-3.5 border-t border-stone-100 flex items-center justify-between text-xs text-stone-600">
+          <span className="text-[11px] font-semibold text-stone-500">Medsos Santri Mifa:</span>
+          <div className="flex items-center gap-1.5">
+            <a
+              href="https://instagram.com/santri_mifa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-stone-100 hover:bg-pink-100 text-stone-600 hover:text-pink-600 transition-colors"
+              title="Instagram @santri_mifa"
+            >
+              <Instagram className="w-3.5 h-3.5" />
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@santri_mifa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-600 hover:text-stone-900 transition-colors"
+              title="TikTok @santri_mifa"
+            >
+              <TikTokIcon className="w-3.5 h-3.5" />
+            </a>
+
+            <a
+              href="https://facebook.com/PonpesMiftahulFalah"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-stone-100 hover:bg-blue-100 text-stone-600 hover:text-blue-600 transition-colors"
+              title="Facebook Ponpes Miftahul Falah"
+            >
+              <Facebook className="w-3.5 h-3.5" />
+            </a>
+
+            <a
+              href="https://www.youtube.com/@SantriMifaOfficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-stone-100 hover:bg-red-100 text-stone-600 hover:text-red-600 transition-colors"
+              title="YouTube Santri Mifa Official"
+            >
+              <Youtube className="w-3.5 h-3.5" />
+            </a>
+
+            <a
+              href="https://linktr.ee/PonpesMiftahulFalah"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-2 py-1 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-800 text-[10px] font-bold transition-colors"
+              title="Linktree"
+            >
+              linktr.ee
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-3 text-center text-[10px] text-stone-400">
+          Layanan chat WhatsApp aktif setiap hari (07.30 - 21.00 WIB).
         </div>
       </div>
     </div>

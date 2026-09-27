@@ -21,6 +21,7 @@ export interface SantriRegistration {
   verifiedAt?: string;
   verifiedBy?: string;
   verificationNotes?: string;
+  photoUrl?: string;
 }
 
 export interface PesantrenContacts {
@@ -33,6 +34,16 @@ export interface PesantrenContacts {
   roisahName: string;
   roisahTitle: string;
   roisahWhatsapp: string;
+}
+
+export interface SocialMediaItem {
+  id: string;
+  platform: string;
+  handle: string;
+  url: string;
+  description: string;
+  badge?: string;
+  color: string;
 }
 
 export interface PrayerTimeItem {

@@ -7,6 +7,7 @@ import {
   NearbyCampus, 
   DewanSantriProgram, 
   PesantrenContacts,
+  SocialMediaItem,
   PsbFeeItem,
   KbmClassLevel,
   KbmNgajiSession,
@@ -42,6 +43,18 @@ export const PESANTREN_INFO = {
   psbEmail: 'psb@miftahulfalah.my.id',
   pengasuh: 'KH. Jajang Tsamrotul Fuad, S.Pd.I.',
   pengasuhTitle: 'Khadimul Ma\'had / Pimpinan Pondok Pesantren',
+  socialMedia: {
+    instagram: '@santri_mifa',
+    instagramUrl: 'https://instagram.com/santri_mifa',
+    tiktok: '@santri_mifa',
+    tiktokUrl: 'https://www.tiktok.com/@santri_mifa',
+    facebook: 'Ponpes Miftahul Falah',
+    facebookUrl: 'https://facebook.com/PonpesMiftahulFalah',
+    youtube: 'Santri Mifa Official',
+    youtubeUrl: 'https://youtube.com/@SantriMifaOfficial',
+    linktree: 'linktr.ee/PonpesMiftahulFalah',
+    linktreeUrl: 'https://linktr.ee/PonpesMiftahulFalah',
+  },
   stats: {
     santriCount: '70+',
     asatidzCount: '5',
@@ -49,6 +62,54 @@ export const PESANTREN_INFO = {
     tahfidzGraduates: '320+',
   }
 };
+
+export const SOCIAL_MEDIA_LIST: SocialMediaItem[] = [
+  {
+    id: 'instagram',
+    platform: 'Instagram',
+    handle: '@santri_mifa',
+    url: 'https://instagram.com/santri_mifa',
+    description: 'Dokumentasi kegiatan santri, kajian kitab harian, reels nasihat & warta pondok',
+    badge: 'Official IG',
+    color: 'from-pink-600 via-rose-600 to-amber-500'
+  },
+  {
+    id: 'tiktok',
+    platform: 'TikTok',
+    handle: '@santri_mifa',
+    url: 'https://www.tiktok.com/@santri_mifa',
+    description: 'Video singkat keseharian santri, lantunan sholawat, dan konten dakwah kreatif',
+    badge: 'Official TikTok',
+    color: 'from-stone-900 to-stone-800'
+  },
+  {
+    id: 'facebook',
+    platform: 'Facebook',
+    handle: 'Ponpes Miftahul Falah',
+    url: 'https://facebook.com/PonpesMiftahulFalah',
+    description: 'Halaman resmi pengumuman, siaran kegiatan, dan silaturahmi alumni & wali santri',
+    badge: 'Facebook Page',
+    color: 'from-blue-600 to-blue-700'
+  },
+  {
+    id: 'youtube',
+    platform: 'YouTube',
+    handle: 'Santri Mifa Official',
+    url: 'https://youtube.com/@SantriMifaOfficial',
+    description: 'Rekaman pengajian kitab, khitobah dakwah santri, sholawatan, & dokumentasi pondok',
+    badge: 'YouTube Channel',
+    color: 'from-red-600 to-red-700'
+  },
+  {
+    id: 'linktree',
+    platform: 'Linktree',
+    handle: 'linktr.ee/PonpesMiftahulFalah',
+    url: 'https://linktr.ee/PonpesMiftahulFalah',
+    description: 'Pusat tautan cepat pendaftaran PSB, media sosial, lokasi, dan narahubung resmi',
+    badge: 'Semua Tautan',
+    color: 'from-emerald-600 to-teal-700'
+  }
+];
 
 export const SELAYANG_PANDANG = {
   title: 'Selayang Pandang Pondok Pesantren Miftahul Falah',
@@ -174,8 +235,8 @@ export const PROGRAMS_DATA: ProgramItem[] = [
     category: 'salaf',
     badge: 'Tradisi Salaf',
     kurikulum: [
-      'Kelas Bawah (Smt 1-4): Matan Al-Jurumiyyah, Nadhom Imrithi, Amtsilah Tashrifiyyah, Safinatun Najah, Fathul Qorib, Taisirul Khalaq, Aqidatul Awwam',
-      'Kelas Atas (Smt 5+): Alfiyah Ibnu Malik, Syarah Ibnu \'Aqil, Fathul Mu\'in, Al-Waraqat, Bulughul Maram, Ihya\' Ulumuddin & Bahtsul Masa\'il',
+      'Kelas Bawah (Smt 1-4): Safinah, Adzkar Nawawi, Ta\'lim, Tuhfatul Athfal (Tajwid), Daqoiqul Akhbar',
+      'Kelas Atas (Smt 5+): Tafsir Jalalain, Aqidatul Awam, Nashoihul Ibad, Alfiyah, Adzkar Nawawi, Durrotun Nashihin, Daqoiqul Akhbar',
       'Jadwal Harian: Subuh (05.15-06.30), Maghrib (18.15-19.15), Isya (19.45-21.00)',
       'Malam Kamis (Ba\'da Isya): Ngaji Gabungan seluruh mahasantri bersama Khadimul Ma\'had',
       'Malam Jumat (Ba\'da Isya): Pembacaan Maulid Al-Barzanji, Tahlil & Marhabaan Akbar'
@@ -198,19 +259,20 @@ export const KBM_CLASSES: KbmClassLevel[] = [
     arabicName: 'المرحلة الأولى (المستوى التأسيسي)',
     badge: 'Semester 1 - 4',
     targetSantri: 'Mahasantri Baru & Tingkat Awal (Semester 1 sampai 4)',
-    description: 'Fokus pembinaan kaidah dasar gramatika bahasa Arab (Nahwu & Sharaf), fiqih ibadah mazhab Syafi\'i, adab santri penuntut ilmu, pembiasaan membaca kitab gundul makna gandul Pegon, dan tahsin tilawah Al-Qur\'an.',
+    description: 'Fokus pembinaan fiqih ibadah dasar mazhab Syafi\'i (Safinah), adab penuntut ilmu (Ta\'lim), kaidah tajwid Al-Qur\'an (Tuhfatul Athfal), amalan dzikir harian (Adzkar Nawawi), serta penanaman iman dan renungan akhirat (Daqoiqul Akhbar).',
     fokusKajian: [
-      'Penguasaan kaidah I\'rob dan struktur kalimat dasar (Nahwu Dasar)',
-      'Tashrif lughawi & istilahi bentuk kata kerja/benda (Sharaf)',
-      'Fiqih Ibadah Praktis: Thaharah, Sholat, Puasa, Zakat',
-      'Penanaman Adab, Akhlak, dan Pembersihan Hati (Tasawuf Awal)'
+      'Fiqih Ibadah Praktis: Thaharah, Sholat, Puasa, Zakat (Safinah)',
+      'Kaidah Hukum Bacaan Al-Qur\'an & Makharijul Huruf (Tuhfatul Athfal)',
+      'Penanaman Adab, Akhlak, dan Budi Pekerti Penuntut Ilmu (Ta\'lim)',
+      'Hafalan Wirid, Dzikir Sunnah & Doa-doa Harian (Adzkar Nawawi)',
+      'Penguatan Aqidah & Renungan Kehidupan Akhirat (Daqoiqul Akhbar)'
     ],
     kitabRujukan: [
-      { bidang: 'Nahwu', kitab: 'Matan Al-Jurumiyyah & Nadhom Al-Imrithi', deskripsi: 'Fondasi kaidah bahasa Arab dan gramatika dasar' },
-      { bidang: 'Sharaf', kitab: 'Al-Amtsilah At-Tashrifiyyah & Matan Al-Bina', deskripsi: 'Perubahan bentuk kosa kata dan bina kata Arab' },
-      { bidang: 'Fiqih', kitab: 'Safinatun Najah & Matan Ghoyah wat Taqrib', deskripsi: 'Panduan ibadah harian bermazhab Syafi\'i' },
-      { bidang: 'Akhlak & Nasehat', kitab: 'Ta\'limul Muta\'allim & Nashoihul \'Ibad', deskripsi: 'Adab penuntut ilmu dan nasehat-nasehat penyejuk iman karya Syekh Nawawi Al-Bantani' },
-      { bidang: 'Tauhid', kitab: 'Aqidatul Awwam & Tijan Ad-Darari', deskripsi: 'Penguatan aqidah Ahlussunnah wal Jama\'ah' }
+      { bidang: 'Fiqih', kitab: 'Safinah' },
+      { bidang: 'Dzikir & Doa', kitab: 'Adzkar Nawawi' },
+      { bidang: 'Akhlak & Adab', kitab: 'Ta\'lim' },
+      { bidang: 'Tajwid', kitab: 'Tuhfatul Athfal (Tajwid)' },
+      { bidang: 'Mau\'izhah & Akhirat', kitab: 'Daqoiqul Akhbar' }
     ],
     metode: ['Sorogan per Mahasantri', 'Bandongan Bersama Asatidz']
   },
@@ -221,20 +283,24 @@ export const KBM_CLASSES: KbmClassLevel[] = [
     arabicName: 'المرحلة العليا (المستوى المتقدم)',
     badge: 'Semester 5 Ke Atas',
     targetSantri: 'Mahasantri Madya & Akhir (Semester 5 ke atas)',
-    description: 'Fokus pendalaman literatur Islam klasik (turats) tingkat lanjut, kaidah ushul fiqih, fiqih muamalah kontemporer, penguasaan nazham Alfiyah, kajian hadits ahkam, serta pelatihan Bahtsul Masa\'il untuk menjawab problematika umat.',
+    description: 'Fokus pendalaman literatur Islam klasik tingkat lanjut: kajian tafsir ayat Al-Qur\'an (Tafsir Jalalain), penguatan nazham aqidah (Aqidatul Awam), nasehat penyejuk iman (Nashoihul Ibad), penguasaan bait nahwu tingkat tinggi (Alfiyah), amalan dzikir mu\'tabar (Adzkar Nawawi), serta mutiara nasehat dan peringatan akhirat (Durrotun Nashihin & Daqoiqul Akhbar).',
     fokusKajian: [
-      'Pendalaman 1000 bait Alfiyah Ibnu Malik & Syarah Ibnu \'Aqil',
-      'Kajian Fiqih Muamalah, Munakahat, Jinayat, & Fathul Mu\'in',
-      'Ushul Fiqih & Qawaid Fiqhiyyah (Metodologi Pengambilan Hukum)',
-      'Kajian Hadits Ahkam Bulughul Maram & Shahih Al-Bukhari',
-      'Musyawarah Bahtsul Masa\'il Waqi\'iyyah & Analisis Fatwa'
+      'Kajian Tafsir Al-Qur\'an Tematik & Maudhu\'i (Tafsir Jalalain)',
+      'Pendalaman Nazham Aqidah Ahlussunnah wal Jama\'ah (Aqidatul Awam)',
+      'Penyucian Jiwa, Akhlak & Tasawuf Amali (Nashoihul Ibad)',
+      'Kaidah Gramatika Bahasa Arab Lanjutan (Alfiyah)',
+      'Dzikir, Doa & Adab Harian Rasulullah SAW (Adzkar Nawawi)',
+      'Mutiara Nasehat Keagamaan & Fadhilah Amal (Durrotun Nashihin)',
+      'Kajian Eskatologi, Alam Kubur & Hari Pembalasan (Daqoiqul Akhbar)'
     ],
     kitabRujukan: [
-      { bidang: 'Nahwu & Balaghah', kitab: 'Alfiyah Ibnu Malik & Syarah Ibnu \'Aqil', deskripsi: 'Gramatika tingkat tinggi dan sastra balaghah Arab' },
-      { bidang: 'Fiqih Lanjutan', kitab: 'Fathul Mu\'in & Fathul Qorib Al-Mujib', deskripsi: 'Kajian hukum mendalam dengan dalil mazhab' },
-      { bidang: 'Ushul Fiqih', kitab: 'Al-Waraqat Imam Al-Haramain & Lathaiful Isyarat', deskripsi: 'Kaidah perumusan hukum dan istinbath dalil' },
-      { bidang: 'Hadits', kitab: 'Bulughul Maram min Adillatil Ahkam', deskripsi: 'Penghimpunan hadits hukum beserta sanad dan derajat hadits' },
-      { bidang: 'Tasawuf Tinggi', kitab: 'Ihya\' Ulumuddin & Al-Hikam As-Sakandari', deskripsi: 'Penyucian jiwa tingkat makrifatullah dan hakikat' }
+      { bidang: 'Tafsir', kitab: 'Tafsir Jalalain' },
+      { bidang: 'Aqidah', kitab: 'Aqidatul Awam' },
+      { bidang: 'Tasawuf', kitab: 'Nashoihul Ibad' },
+      { bidang: 'Gramatika / Nahwu', kitab: 'Alfiyah' },
+      { bidang: 'Dzikir & Doa', kitab: 'Adzkar Nawawi' },
+      { bidang: 'Mau\'izhah & Akhlak', kitab: 'Durrotun Nashihin' },
+      { bidang: 'Mau\'izhah & Akhirat', kitab: 'Daqoiqul Akhbar' }
     ],
     metode: ['Bandongan Bersama Pengasuh', 'Musyawarah Bahtsul Masa\'il', 'Qira\'atul Kutub Mandiri']
   }
@@ -246,8 +312,8 @@ export const KBM_SESSIONS: KbmNgajiSession[] = [
     jam: '05.15 - 06.30 WIB',
     arabicName: 'مَجْلِسُ الصَّبَاحِ (بَعْدَ صَلَاةِ الْفَجْرِ)',
     iconName: 'Sun',
-    kelasBawahFocus: 'Kajian Nahwu & Sharaf serta Kitab Nashoihul Ibad',
-    kelasAtasFocus: 'Kajian Alfiyah Ibnu Malik & Tafsir Jalalain bersama Dewan Asatidz',
+    kelasBawahFocus: 'Kajian Fiqih Safinah & Wirid Adzkar Nawawi',
+    kelasAtasFocus: 'Kajian Tafsir Jalalain dan Aqidatul Awam',
     keterangan: 'Selesai pukul 06.30 WIB, sehingga mahasantri leluasa mandi, sarapan, dan berangkat kuliah pagi di kampus (UIN, Unpad, ITB, UPI, dll).'
   },
   {
@@ -255,8 +321,8 @@ export const KBM_SESSIONS: KbmNgajiSession[] = [
     jam: '18.15 - 19.15 WIB',
     arabicName: 'مَجْلِسُ الْمَغْرِبِ (بَيْنَ الْمَغْرِبِ وَالْعِشَاءِ)',
     iconName: 'BookOpen',
-    kelasBawahFocus: 'Sorogan Kitab Fiqih (Safinatun Najah / Ghoyah wat Taqrib) & Makna Pegon',
-    kelasAtasFocus: 'Kajian Bandongan Fathul Mu\'in & Ushul Fiqih Al-Waraqat',
+    kelasBawahFocus: 'Sorogan Kitab Safinah & Tajwid Tuhfatul Athfal Makna Pegon',
+    kelasAtasFocus: 'Kajian Bandongan Nashoihul Ibad & Alfiyah',
     keterangan: 'Dilaksanakan intensif ba\'da sholat Maghrib berjamaah hingga masuk waktu Isya di ruang kelas dan aula pesantren.'
   },
   {
@@ -264,8 +330,8 @@ export const KBM_SESSIONS: KbmNgajiSession[] = [
     jam: '19.45 - 21.00 WIB',
     arabicName: 'مَجْلِسُ الْعِشَاءِ (بَعْدَ صَلَاةِ الْعِشَاءِ)',
     iconName: 'Moon',
-    kelasBawahFocus: 'Mudzakarah, Pengayaan Kosa Kata Arab & Akhlak (Ta\'limul Muta\'allim)',
-    kelasAtasFocus: 'Kajian Tasawuf (Ihya Ulumuddin / Al-Hikam) & Forum Bahtsul Masa\'il Santri',
+    kelasBawahFocus: 'Kajian Ta\'lim (Adab Santri) & Kitab Daqoiqul Akhbar',
+    kelasAtasFocus: 'Kajian Durrotun Nashihin, Daqoiqul Akhbar & Adzkar Nawawi',
     keterangan: 'Sesi pendalaman dan diskusi interaktif santri. *Malam Kamis beralih menjadi Ngaji Gabungan, dan Malam Jumat pembacaan Barzanji & Marhaba.'
   }
 ];
@@ -320,7 +386,7 @@ export const DAILY_SCHEDULE: ScheduleItem[] = [
     activity: 'KBM Ngaji Kitab Subuh (Kelas Bawah & Kelas Atas)',
     arabicName: 'مجلس علم الصباح لجميع الفصول',
     category: 'belajar',
-    description: 'Kelas Bawah (Smt 1-4): Jurumiyyah/Imrithi & Tahsin | Kelas Atas (Smt 5+): Alfiyah Ibnu Malik & Tafsir Jalalain.'
+    description: 'Kelas Bawah (Smt 1-4): Fiqih Safinah & Wirid Adzkar Nawawi | Kelas Atas (Smt 5+): Kajian Tafsir Jalalain dan Aqidatul Awam.'
   },
   {
     time: '06.30 - 16.30',
@@ -341,7 +407,7 @@ export const DAILY_SCHEDULE: ScheduleItem[] = [
     activity: 'KBM Ngaji Kitab Maghrib (Sorogan & Bandongan)',
     arabicName: 'مجلس علم المغرب والفقه',
     category: 'belajar',
-    description: 'Kelas Bawah (Smt 1-4): Sorogan Safinatun Najah / Fathul Qorib | Kelas Atas (Smt 5+): Bandongan Fathul Mu\'in & Ushul Fiqih.'
+    description: 'Kelas Bawah (Smt 1-4): Sorogan Safinah & Tuhfatul Athfal | Kelas Atas (Smt 5+): Bandongan Nashoihul Ibad & Aqidatul Awam.'
   },
   {
     time: '19.45 - 21.00',
@@ -432,14 +498,14 @@ export const FACILITIES_DATA: FacilityItem[] = [
   },
   {
     id: 'madrasah',
-    title: 'Gedung Madrasah',
+    title: 'Madrasah',
     category: 'akademik',
-    description: 'Gedung sarana belajar mengajar santri untuk pembelajaran klasikal madrasah diniyah takmiliyah, sorogan, bandongan, dan pengkajian disiplin keilmuan Islam berjenjang.',
+    description: 'Sarana belajar mengajar santri untuk pembelajaran klasikal madrasah diniyah takmiliyah, sorogan, bandongan, dan pengkajian disiplin keilmuan Islam berjenjang.',
     image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 'masjid',
-    title: 'Masjid Pesantren Miftahul Falah',
+    title: 'Masjid Miftahul Falah',
     category: 'ibadah',
     description: 'Pusat spiritual dan kegiatan ibadah utama santri. Digunakan untuk shalat lima waktu berjamaah, mujahadah, pengajian akbar mingguan, halaqah tahfidz Al-Qur\'an, dan majelis sholawat.',
     image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80',
@@ -546,7 +612,6 @@ export const PERSUASIVE_FEE_DATA = {
   ],
   monthlyIncludes: [
     'Bimbingan kajian Kitab Kuning Turats (Nahwu, Shorof, Fiqih, Hadits, Tasawuf)',
-    'Halaqah Tahfidz & Tahsin Al-Qur\'an bersanad dengan bimbingan ustadz/ustadzah',
     'Fasilitas tempat tinggal di Asrama Mukim (putra dan putri terpisah ketat)',
     'Penggunaan sarana pesantren, listrik, air bersih, dan fasilitas kebersihan',
     'Pembinaan disiplin dan akhlakul karimah 24 jam di bawah asuhan dewan asatidz',
@@ -555,7 +620,6 @@ export const PERSUASIVE_FEE_DATA = {
   annualIncludes: [
     'Pemeliharaan dan peremajaan sarana prasarana asrama santri',
     'Penyelenggaraan Peringatan Hari Besar Islam (PHBI) & tabligh akbar pondok',
-    'Dukungan kegiatan organisasi Dewan Santri (OSIS/IPNU/IPPNU) & ekstrakurikuler',
     'Kelancaran administrasi dan operasional pendidikan santri sepanjang tahun ajaran'
   ],
   guaranteeText: 'Bagi keluarga dhuafa dan santri berprestasi huffadz 30 juz, Pesantren Miftahul Falah membuka Jalur Beasiswa Khusus. Jangan biarkan kendala finansial memadamkan cita-cita anak Anda menjadi pembela agama Allah.'
@@ -620,28 +684,8 @@ export const FAQ_DATA: FaqItem[] = [
     category: 'Kedisiplinan'
   },
   {
-    question: 'Apakah santri diperbolehkan membawa handphone / smartphone?',
-    answer: 'Demi menjaga fokus menghafal Al-Qur\'an, ketenangan hati, dan interaksi sosial yang sehat, santri tidak diperbolehkan membawa HP ke asrama. Untuk komunikasi dengan orang tua, pondok menyediakan sarana Wartel Santri dan jadwal panggilan video terjadwal setiap akhir pekan di bawah bimbingan wali asrama.',
-    category: 'Peraturan'
-  },
-  {
-    question: 'Bagaimana jika calon santri belum lancar membaca Al-Qur\'an?',
-    answer: 'Jangan khawatir. Pesantren Miftahul Falah memiliki program matrikulasi (Tahsin Al-Qur\'an Intensif Metode Tilawati & Yanbu\'a) selama 3 bulan pertama sebelum santri masuk ke halaqah tahfidz atau kajian kitab lanjutan. Asatidz akan membimbing dari dasar makharijul huruf hingga fasih.',
-    category: 'Akademik'
-  },
-  {
-    question: 'Bagaimana standar pemenuhan konsumsi dan gizi santri?',
-    answer: 'Dapur umum pesantren dipimpin oleh koki berpengalaman dengan menu bergizi 4 sehat 5 sempurna yang berganti setiap hari (nasi, lauk pauk berprotein daging sapi/ayam/telur/ikan laut, sayuran segar, buah, dan susu). Kebersihan bahan makanan diawasi oleh tim kesehatan poskestren.',
-    category: 'Fasilitas'
-  },
-  {
-    question: 'Apakah santri luar pulau atau luar negeri bisa mendaftar?',
-    answer: 'Sangat bisa. Pesantren Miftahul Falah saat ini mengasuh santri dari berbagai penjuru provinsi di Indonesia (Sumatera, Kalimantan, Sulawesi, Maluku, Papua, Jawa) serta santri mancanegara. Tersedia layanan jemputan resmi dari Bandara Soekarno-Hatta / Stasiun bagi santri baru.',
-    category: 'PSB'
-  },
-  {
     question: 'Berapa rincian biaya bulanan dan tahunan mondok di Pesantren Miftahul Falah?',
-    answer: 'Alhamdulillah, Pondok Pesantren Miftahul Falah menetapkan Biaya Bulanan (Syahriah) sebesar Rp 120.000 / bulan (salah satu yang paling terjangkau di Kabupaten Bandung) dan Biaya Tahunan (Infaq Operasional) sebesar Rp 150.000 / tahun. Biaya bulanan sudah mencakup bimbingan kajian kitab kuning turats, halaqah tahfidz Al-Qur\'an, asrama mukim putra/putri, listrik, air bersih, serta pembinaan akhlak 24 jam. Kami memegang teguh amanah bahwa biaya tidak boleh menjadi penghalang bagi siapapun yang ingin menuntut ilmu agama.',
+    answer: 'Alhamdulillah, Pondok Pesantren Miftahul Falah menetapkan Biaya Bulanan (Syahriah) sebesar Rp 120.000 / bulan (salah satu yang paling terjangkau di Kabupaten Bandung) dan Biaya Tahunan (Infaq Operasional) sebesar Rp 150.000 / tahun. Biaya bulanan sudah mencakup bimbingan kajian kitab kuning turats, asrama mukim putra/putri, listrik, air bersih, serta pembinaan akhlak 24 jam. Kami memegang teguh amanah bahwa biaya tidak boleh menjadi penghalang bagi siapapun yang ingin menuntut ilmu agama.',
     category: 'Pembiayaan'
   },
   {
@@ -650,9 +694,24 @@ export const FAQ_DATA: FaqItem[] = [
     category: 'Pembiayaan'
   },
   {
-    question: 'Apakah mahasiswa aktif dari kampus sekitar (UIN, UMB, Bhakti Kencana, ITB, Ikopin, Unpad, UPI) bisa mukim di pesantren?',
-    answer: 'Sangat bisa dan sangat dianjurkan. Ponpes Miftahul Falah memiliki Asrama Khusus Mahasantri dengan KBM berjenjang yang dibagi 2 kelas: Kelas Bawah (Mahasantri Semester 1 sampai 4) dan Kelas Atas (Semester 5 ke atas). Jadwal ngaji diselenggarakan pada waktu Maghrib, Isya, dan Subuh. Khusus Malam Kamis ba\'da Isya diadakan Ngaji Gabungan seluruh santri, dan Malam Jumat pembacaan Maulid Al-Barzanji & Marhaba. Siang hari (06.30 - 16.30 WIB) mahasiswa 100% leluasa kuliah, praktikum, dan berorganisasi di kampus masing-masing.',
-    category: 'Mahasantri'
+    question: 'Apakah santri (putra) diperbolehkan membawa sepeda motor?',
+    answer: 'Boleh. Santri putra diperbolehkan membawa sepeda motor ke asrama guna menunjang mobilitas perkuliahan ke kampus masing-masing. Santri wajib mematuhi aturan parkir di area yang telah disediakan serta menjaga ketertiban dan keamanan bersama.',
+    category: 'Fasilitas'
+  },
+  {
+    question: 'Apakah santriah (putri) boleh membawa sepeda motor?',
+    answer: 'Santriah (putri) disarankan untuk tidak membawa sepeda motor karena keterbatasan lahan dan tidak tersedianya area parkir motor khusus santriah di kompleks asrama putri. Untuk mobilitas kuliah, santriah dapat menggunakan angkutan umum atau transportasi daring (ojol) yang sangat mudah diakses.',
+    category: 'Fasilitas'
+  },
+  {
+    question: 'Bagaimana pengaturan makan dan konsumsi harian santri?',
+    answer: 'Sistem konsumsi santri bersifat fleksibel dan mandiri. Santri dapat membuat jadwal masak bersama (ngaliwet) bersama teman sekamar/kobong secara bergiliran agar lebih hemat dan kompak, atau membeli makanan secara mandiri di warung-warung makan sekitar pesantren yang ramah kantong mahasiswa.',
+    category: 'Keseharian'
+  },
+  {
+    question: 'Bagaimana toleransi dispensasi absen ngaji jika bentrok jadwal kuliah?',
+    answer: 'Santri diberi toleransi dan dispensasi izin tidak mengikuti ngaji Subuh apabila memiliki jadwal perkuliahan pagi (jam 06.00 atau jam 07.00 WIB) agar dapat bersiap dan tidak terlambat ke kampus. Santri cukup mengonfirmasikan izin kepada pengurus atau asatidz pengampu.',
+    category: 'Akademik'
   }
 ];
 
@@ -1087,13 +1146,13 @@ export const DEWAN_SANTRI_PROGRAMS: DewanSantriProgram[] = [
     bidangName: 'Bidang PSDM (Pengembangan Sumber Daya Manusia)',
     badge: 'Komunikasi & Retorika',
     tagline: 'Berani Bersuara, Fasih Menyampaikan Gagasan Kebajikan',
-    description: 'Pelatihan teknik komunikasi di hadapan audiens, pembawa acara (MC), artikulasi vokal, gestur tubuh, dan teknik mengatasi rasa gugup di panggung.',
+    description: 'Pelatihan teknik komunikasi di hadapan audiens, artikulasi vokal, gestur tubuh, dan teknik mengatasi rasa gugup di panggung.',
     objectives: [
       'Mengikis demam panggung dan menumbuhkan kepercayaan diri santri',
       'Penguasaan struktur materi pidato pembuka, isi, dan penutup yang memikat',
-      'Pelatihan keprotokolan dan pembawa acara resmi di lingkungan pesantren'
+      'Pelatihan keprotokolan resmi di lingkungan pesantren'
     ],
-    targetSkills: ['Retorika Panggung', 'Master of Ceremony (MC)', 'Artikulasi Vokal', 'Body Language'],
+    targetSkills: ['Retorika Panggung', 'Artikulasi Vokal', 'Body Language'],
     executionNote: 'Waktu pelaksanaan akan diumumkan oleh pengurus',
     icon: 'Mic'
   },
@@ -1101,18 +1160,20 @@ export const DEWAN_SANTRI_PROGRAMS: DewanSantriProgram[] = [
   // BIDANG PENDIDIKAN
   {
     id: 'pendidikan-muhadoroh',
-    title: 'Muhadoroh',
+    title: 'Muhadharah',
     bidangId: 'pendidikan',
     bidangName: 'Bidang Pendidikan',
-    badge: 'Latihan Pidato 3 Bahasa',
-    tagline: 'Kawah Candradimuka Da\'i dan Orator Masa Depan',
-    description: 'Agenda rutin santri berlatih menyampaikan orasi ilmiah dan khitobah keagamaan dalam Bahasa Arab, Bahasa Inggris, dan Bahasa Indonesia secara bergiliran.',
+    badge: 'Penampilan Santri',
+    tagline: 'Syiar Dakwah, Gema Sholawat, dan Penguatan Amaliah Pesantren',
+    description: 'Kegiatan penampilan santri yang mencakup pembacaan barzanji, sholawat, tawasul, bahtsul kutub, dakwah, dan penampilan kreasi keislaman lainnya (dll).',
     objectives: [
-      'Membiasakan santri berpidato dan menyampaikan dalil secara fasih',
-      'Melatih kepemimpinan sidang, keprotokolan acara, dan evaluasi audiens santri',
-      'Mencetak kader da\'i yang siap berdakwah di kancah nasional maupun global'
+      'Pembacaan Maulid Al-Barzanji & qasidah sholawat Nabi',
+      'Praktik tawasul dan dzikir jama\'i salafus sholih',
+      'Bahtsul kutub & pengkajian khazanah kitab kuning',
+      'Latihan dakwah dan retorika khitobah keagamaan',
+      'Penampilan seni, minat bakat, dan kreasi santri lainnya (dll.)'
     ],
-    targetSkills: ['Khitobah 3 Bahasa', 'Manajemen Forum', 'Pemikiran Kritis', 'Retorika Dakwah'],
+    targetSkills: ['Pembacaan Barzanji', 'Sholawat', 'Tawasul', 'Bahtsul Kutub', 'Dakwah', 'Kreasi Santri'],
     executionNote: 'Waktu pelaksanaan akan diumumkan oleh pengurus',
     icon: 'Users'
   },

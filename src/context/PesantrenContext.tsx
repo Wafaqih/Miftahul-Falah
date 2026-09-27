@@ -88,7 +88,17 @@ export const PesantrenProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [proker, setProker] = useState<DewanSantriProgram[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.PROKER);
-      return saved ? JSON.parse(saved) : DEWAN_SANTRI_PROGRAMS;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return parsed.map((item: any) => {
+          if (item.id === 'pendidikan-muhadoroh') {
+            const fresh = DEWAN_SANTRI_PROGRAMS.find(p => p.id === 'pendidikan-muhadoroh');
+            return fresh || item;
+          }
+          return item;
+        });
+      }
+      return DEWAN_SANTRI_PROGRAMS;
     } catch {
       return DEWAN_SANTRI_PROGRAMS;
     }
@@ -98,7 +108,19 @@ export const PesantrenProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [facilities, setFacilities] = useState<FacilityItem[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.FACILITIES);
-      return saved ? JSON.parse(saved) : FACILITIES_DATA;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return parsed.map((item: any) => {
+          if (item.id === 'madrasah' && (item.title === 'Gedung Madrasah' || item.title?.toLowerCase().includes('gedung madrasah'))) {
+            return { ...item, title: 'Madrasah' };
+          }
+          if (item.id === 'masjid' && (item.title === 'Masjid Pesantren Miftahul Falah' || item.title?.toLowerCase().includes('pesantren miftahul falah'))) {
+            return { ...item, title: 'Masjid Miftahul Falah' };
+          }
+          return item;
+        });
+      }
+      return FACILITIES_DATA;
     } catch {
       return FACILITIES_DATA;
     }
@@ -150,7 +172,8 @@ export const PesantrenProvider: React.FC<{ children: React.ReactNode }> = ({ chi
             registeredAt: '10 Februari 2026',
             verifiedAt: '11 Februari 2026, 09:30 WIB',
             verifiedBy: 'Sekretariat PSB (Ustadz Ahmad Fauzi)',
-            verificationNotes: 'Berkas ijazah, KK, dan pas foto telah lengkap dan valid.'
+            verificationNotes: 'Berkas ijazah, KK, dan pas foto telah lengkap dan valid.',
+            photoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=400&auto=format&fit=crop'
           },
           {
             id: 'reg-demo-2',
@@ -169,7 +192,8 @@ export const PesantrenProvider: React.FC<{ children: React.ReactNode }> = ({ chi
             address: 'Kp. Pasirwangi RT 02/04',
             city: 'Kab. Tasikmalaya',
             status: 'Menunggu Verifikasi',
-            registeredAt: '15 Februari 2026'
+            registeredAt: '15 Februari 2026',
+            photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop'
           }
         ];
         localStorage.setItem(STORAGE_KEYS.REGISTRATIONS, JSON.stringify(initialSample));

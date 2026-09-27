@@ -73,13 +73,6 @@ export default function App() {
             onSelectProgramToRegister={(progName) => handleOpenPsbRegister(progName)} 
           />
 
-          {/* Biaya Bulanan & Tahunan (Termurah se-Kabupaten Bandung) */}
-          <BiayaSection 
-            onOpenPsb={() => handleOpenPsbRegister()}
-            onOpenFeesModal={handleOpenFees}
-            onOpenWhatsapp={() => setIsContactModalOpen(true)}
-          />
-
           {/* 24-Hour Santri Daily Routine */}
           <DailyScheduleSection />
 
@@ -93,6 +86,13 @@ export default function App() {
 
           {/* Campus Facilities */}
           <FacilitiesGallery />
+
+          {/* Biaya Bulanan & Tahunan (Termurah se-Kabupaten Bandung) */}
+          <BiayaSection 
+            onOpenPsb={() => handleOpenPsbRegister()}
+            onOpenFeesModal={handleOpenFees}
+            onOpenWhatsapp={() => setIsContactModalOpen(true)}
+          />
 
           {/* News & Islamic Study Articles */}
           <NewsSection />

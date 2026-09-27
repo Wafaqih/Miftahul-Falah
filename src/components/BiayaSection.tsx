@@ -94,10 +94,10 @@ export const BiayaSection: React.FC<BiayaSectionProps> = ({
         </div>
 
         {/* 2 Main Highlight Pricing Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12 h-[1200px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12">
           
           {/* Card 1: Biaya Bulanan (Termurah se-Kabupaten Bandung) */}
-          <div className="relative rounded-3xl bg-white border-2 border-emerald-600 shadow-xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden h-[646px]">
+          <div className="relative rounded-3xl bg-white border-2 border-emerald-600 shadow-xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden">
             {/* Ribbon Tag */}
             <div className="absolute top-0 right-0">
               <div className="bg-emerald-600 text-white font-extrabold text-[11px] tracking-wider uppercase py-1.5 px-6 rounded-bl-2xl shadow-sm flex items-center gap-1.5 mb-0">
@@ -108,8 +108,8 @@ export const BiayaSection: React.FC<BiayaSectionProps> = ({
 
             <div>
               <div className="flex items-center gap-2.5 text-emerald-800 font-bold text-xs uppercase tracking-wider mb-2">
-                <Coins className="w-4 h-4 text-emerald-600 mt-[10px]" />
-                <span className="mt-[13px]">Syahriah / Infaq Bulanan Santri</span>
+                <Coins className="w-4 h-4 text-emerald-600" />
+                <span>Syahriah / Infaq Bulanan Santri</span>
               </div>
 
               <div className="flex items-baseline gap-2 mb-1">
@@ -162,7 +162,7 @@ export const BiayaSection: React.FC<BiayaSectionProps> = ({
             </div>
 
             <div>
-              <div className="flex items-center gap-2.5 text-amber-800 font-bold text-xs uppercase tracking-wider mb-2 mt-[11px]">
+              <div className="flex items-center gap-2.5 text-amber-800 font-bold text-xs uppercase tracking-wider mb-2">
                 <Building2 className="w-4 h-4 text-amber-600" />
                 <span>Infaq Operasional & Pemeliharaan</span>
               </div>

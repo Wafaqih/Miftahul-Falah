@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   X, 
   Sparkles, 
@@ -11,7 +11,12 @@ import {
   ShieldCheck,
   AlertCircle,
   Clock,
-  ArrowRight
+  ArrowRight,
+  Camera,
+  Upload,
+  Trash2,
+  Image as ImageIcon,
+  Check
 } from 'lucide-react';
 import { PESANTREN_INFO, PSB_FEES, PSB_TOTAL_ENTRY_FEE } from '../data/pesantrenData.ts';
 import { SantriRegistration } from '../types.ts';
@@ -47,6 +52,7 @@ export const PsbRegistrationModal: React.FC<PsbRegistrationModalProps> = ({
     parentPhone: '',
     address: '',
     city: '',
+    photoUrl: '',
   });
 
   const [submittedCard, setSubmittedCard] = useState<SantriRegistration | null>(null);
@@ -54,6 +60,76 @@ export const PsbRegistrationModal: React.FC<PsbRegistrationModalProps> = ({
   const [searchedResult, setSearchedResult] = useState<SantriRegistration | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isDraggingPhoto, setIsDraggingPhoto] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Sample photos for quick preview
+  const SAMPLE_PHOTO_PUTRA = 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=400&auto=format&fit=crop';
+  const SAMPLE_PHOTO_PUTRI = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop';
+
+  const processImageFile = (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      setErrorMessage('File harus berformat gambar (JPG, PNG, WEBP).');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setErrorMessage('Ukuran file foto maksimal 5 MB.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        // Compress and scale down to max 600px for optimal speed and storage
+        const canvas = document.createElement('canvas');
+        const maxDim = 600;
+        let width = img.width;
+        let height = img.height;
+        if (width > height) {
+          if (width > maxDim) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          }
+        } else {
+          if (height > maxDim) {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressed = canvas.toDataURL('image/jpeg', 0.85);
+          setFormData(prev => ({ ...prev, photoUrl: compressed }));
+          setErrorMessage('');
+        } else {
+          setFormData(prev => ({ ...prev, photoUrl: event.target?.result as string }));
+          setErrorMessage('');
+        }
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handlePhotoFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      processImageFile(file);
+    }
+  };
+
+  const handlePhotoDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDraggingPhoto(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      processImageFile(file);
+    }
+  };
 
   // Sync tab with props
   useEffect(() => {
@@ -91,7 +167,8 @@ export const PsbRegistrationModal: React.FC<PsbRegistrationModalProps> = ({
       address: formData.address || 'Alamat Lengkap',
       city: formData.city || 'Jawa Barat',
       status: 'Menunggu Verifikasi',
-      registeredAt: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+      registeredAt: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+      photoUrl: formData.photoUrl || undefined
     };
 
     // Save to PesantrenContext
@@ -228,15 +305,38 @@ export const PsbRegistrationModal: React.FC<PsbRegistrationModalProps> = ({
 
                   {/* Printable Registration Card Element */}
                   <div id="printable-card" className="bg-stone-50 border-2 border-dashed border-emerald-800/50 rounded-3xl p-6 sm:p-8 space-y-6 relative">
-                    <div className="flex flex-col sm:flex-row items-center justify-between border-b border-stone-200 pb-4 gap-3">
-                      <div>
-                        <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-800 block">KARTU BUKTI PENDAFTARAN RESMI</span>
-                        <h4 className="text-lg font-black text-stone-900">{PESANTREN_INFO.name}</h4>
-                        <p className="text-xs text-stone-500 font-mono">Domain: {PESANTREN_INFO.domain} | NSPP: {PESANTREN_INFO.nspp}</p>
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between border-b border-stone-200 pb-5 gap-4">
+                      <div className="flex items-center gap-4 w-full sm:w-auto">
+                        {/* Official 3x4 Pas Foto frame on card */}
+                        <div className="w-20 h-26 sm:w-24 sm:h-32 rounded-xl border-2 border-emerald-800/40 bg-white p-1 shadow-sm overflow-hidden shrink-0 flex flex-col items-center justify-center text-center relative group">
+                          {submittedCard.photoUrl ? (
+                            <img 
+                              src={submittedCard.photoUrl} 
+                              alt={submittedCard.fullName}
+                              className="w-full h-full object-cover rounded-lg"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex flex-col items-center justify-center bg-stone-100 rounded-lg text-stone-400 p-1">
+                              <User className="w-7 h-7 text-stone-300 mb-0.5" />
+                              <span className="text-[8px] font-bold uppercase leading-tight font-mono text-stone-400">PAS FOTO<br/>3X4</span>
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-800 block">KARTU BUKTI PENDAFTARAN RESMI</span>
+                          <h4 className="text-lg font-black text-stone-900">{PESANTREN_INFO.name}</h4>
+                          <p className="text-xs text-stone-500 font-mono">Domain: {PESANTREN_INFO.domain} | NSPP: {PESANTREN_INFO.nspp}</p>
+                          <span className="inline-block mt-1 text-[11px] font-semibold text-emerald-900 bg-emerald-100/80 px-2 py-0.5 rounded-md border border-emerald-200">
+                            Program Santri Mahasiswa &bull; TA 2026/2027
+                          </span>
+                        </div>
                       </div>
-                      <div className="text-center sm:text-right bg-emerald-800 text-white px-4 py-2 rounded-xl">
+
+                      <div className="text-center sm:text-right bg-emerald-800 text-white px-4 py-2.5 rounded-xl shrink-0 w-full sm:w-auto">
                         <span className="text-[10px] text-amber-300 font-bold block uppercase tracking-wider">Nomor Registrasi</span>
                         <span className="text-base sm:text-lg font-mono font-black">{submittedCard.registrationNumber}</span>
+                        <span className="text-[10px] text-emerald-200 block mt-0.5">{submittedCard.registeredAt}</span>
                       </div>
                     </div>
 
@@ -328,7 +428,9 @@ export const PsbRegistrationModal: React.FC<PsbRegistrationModalProps> = ({
                             parentPhone: '',
                             address: '',
                             city: '',
+                            photoUrl: '',
                           });
+                          if (fileInputRef.current) fileInputRef.current.value = '';
                         }}
                         className="text-xs font-semibold text-stone-500 hover:text-stone-800 cursor-pointer"
                       >
@@ -467,11 +569,156 @@ export const PsbRegistrationModal: React.FC<PsbRegistrationModalProps> = ({
                     </div>
                   </div>
 
-                  {/* Section 2: Data Wali & Kontak */}
+                  {/* Section 2: Upload Pas Foto Calon Santri (Ukuran 3x4) */}
+                  <div className="space-y-3 pt-3 border-t border-stone-200">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-2">
+                        <Camera className="w-4 h-4 text-emerald-700" />
+                        2. Upload Pas Foto Calon Santri (Ukuran 3x4)
+                      </h3>
+                      <span className="text-[10px] text-emerald-800 font-semibold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
+                        Format Resmi 3x4
+                      </span>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200">
+                      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                        {/* 3x4 Portrait Preview Box */}
+                        <div className="relative group shrink-0">
+                          <div className={`w-28 h-36 rounded-xl border-2 overflow-hidden flex flex-col items-center justify-center transition-all bg-white shadow-sm ${
+                            formData.photoUrl 
+                              ? 'border-emerald-600 ring-2 ring-emerald-500/20' 
+                              : isDraggingPhoto 
+                                ? 'border-emerald-500 border-dashed bg-emerald-50/50' 
+                                : 'border-stone-300 border-dashed hover:border-emerald-400'
+                          }`}>
+                            {formData.photoUrl ? (
+                              <div className="w-full h-full relative">
+                                <img
+                                  src={formData.photoUrl}
+                                  alt="Pas Foto Calon Santri"
+                                  className="w-full h-full object-cover"
+                                />
+                                <div className="absolute top-1.5 right-1.5 bg-emerald-800 text-white p-0.5 rounded-full shadow-xs">
+                                  <Check className="w-3 h-3" />
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="text-center p-2 space-y-1">
+                                <Camera className="w-8 h-8 text-stone-400 mx-auto" />
+                                <div className="text-[10px] font-bold text-stone-600 uppercase tracking-wider">
+                                  Pas Foto 3x4
+                                </div>
+                                <div className="text-[9px] text-stone-400">
+                                  Belum diunggah
+                                </div>
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="text-center mt-1.5">
+                            <span className="text-[10px] font-mono text-stone-500 font-medium">Ukuran 3 x 4 cm</span>
+                          </div>
+                        </div>
+
+                        {/* Upload Controls & Rules */}
+                        <div className="flex-1 w-full space-y-3">
+                          {/* Drag & Drop Area */}
+                          <div
+                            onDragOver={(e) => { e.preventDefault(); setIsDraggingPhoto(true); }}
+                            onDragLeave={() => setIsDraggingPhoto(false)}
+                            onDrop={handlePhotoDrop}
+                            onClick={() => fileInputRef.current?.click()}
+                            className={`p-4 rounded-xl border-2 border-dashed transition-all cursor-pointer text-center ${
+                              isDraggingPhoto
+                                ? 'border-emerald-500 bg-emerald-50/60 text-emerald-900'
+                                : 'border-stone-300 hover:border-emerald-500 bg-white hover:bg-stone-50/80 text-stone-600'
+                            }`}
+                          >
+                            <input
+                              type="file"
+                              ref={fileInputRef}
+                              onChange={handlePhotoFileChange}
+                              accept="image/jpeg,image/png,image/webp"
+                              className="hidden"
+                            />
+                            <div className="flex items-center justify-center gap-2 mb-1">
+                              <Upload className="w-4 h-4 text-emerald-700" />
+                              <span className="text-xs font-bold text-stone-800">
+                                {formData.photoUrl ? 'Klik untuk Mengganti Pas Foto' : 'Klik atau Tarik File Pas Foto ke Sini'}
+                              </span>
+                            </div>
+                            <p className="text-[11px] text-stone-500">
+                              Format file: <span className="font-semibold text-stone-700">JPG, PNG, WEBP</span> (Maksimal 5 MB)
+                            </p>
+                          </div>
+
+                          {/* Action Buttons if Photo Uploaded */}
+                          {formData.photoUrl && (
+                            <div className="flex items-center gap-2">
+                              <button
+                                type="button"
+                                onClick={() => fileInputRef.current?.click()}
+                                className="px-3 py-1.5 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-900 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                              >
+                                <Camera className="w-3.5 h-3.5" />
+                                <span>Pilih Foto Lain</span>
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setFormData(prev => ({ ...prev, photoUrl: '' }));
+                                  if (fileInputRef.current) fileInputRef.current.value = '';
+                                }}
+                                className="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-rose-200/60"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                                <span>Hapus Foto</span>
+                              </button>
+                            </div>
+                          )}
+
+                          {/* Photo Guidelines */}
+                          <div className="p-2.5 rounded-xl bg-amber-50/80 border border-amber-200/80 text-[11px] text-amber-950 space-y-1">
+                            <span className="font-bold flex items-center gap-1 text-amber-900">
+                              <Sparkles className="w-3 h-3 text-amber-600" />
+                              Ketentuan Pas Foto Resmi:
+                            </span>
+                            <ul className="list-disc list-inside space-y-0.5 text-stone-700 text-[10px]">
+                              <li>Foto terbaru, wajah menghadap ke depan dengan pencahayaan jelas.</li>
+                              <li>Berbusana muslim/muslimah rapi (santri putra berpeci, santriwati berkerudung).</li>
+                              <li>Latar belakang polos warna merah, biru, putih, atau netral.</li>
+                            </ul>
+                          </div>
+
+                          {/* Fast Testing Quick Samples */}
+                          <div className="pt-1 flex flex-wrap items-center gap-2 text-[10px] text-stone-500">
+                            <span className="font-semibold text-stone-600">Opsi Uji Coba Cepat:</span>
+                            <button
+                              type="button"
+                              onClick={() => setFormData(prev => ({ ...prev, photoUrl: SAMPLE_PHOTO_PUTRA, gender: 'putra' }))}
+                              className="px-2.5 py-1 rounded-lg bg-stone-200 hover:bg-stone-300 text-stone-700 font-medium transition-colors cursor-pointer flex items-center gap-1"
+                            >
+                              <span>Contoh Foto Putra</span>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setFormData(prev => ({ ...prev, photoUrl: SAMPLE_PHOTO_PUTRI, gender: 'putri' }))}
+                              className="px-2.5 py-1 rounded-lg bg-stone-200 hover:bg-stone-300 text-stone-700 font-medium transition-colors cursor-pointer flex items-center gap-1"
+                            >
+                              <span>Contoh Foto Putri</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Section 3: Data Wali & Kontak */}
                   <div className="space-y-3 pt-2 border-t border-stone-200">
                     <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-2">
                       <Phone className="w-4 h-4" />
-                      2. Data Orang Tua / Wali & Kontak
+                      3. Data Orang Tua / Wali & Kontak
                     </h3>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -604,11 +851,24 @@ export const PsbRegistrationModal: React.FC<PsbRegistrationModalProps> = ({
                 <div>
                   {searchedResult ? (
                     <div className="bg-white rounded-2xl p-6 border-2 border-emerald-600/30 shadow-md space-y-4">
-                      <div className="flex items-center justify-between border-b border-stone-100 pb-3">
-                        <div>
-                          <span className="text-[10px] text-stone-400 font-bold uppercase block">Hasil Ditemukan</span>
-                          <h4 className="text-base font-bold text-stone-900">{searchedResult.fullName}</h4>
-                          <span className="text-xs font-mono text-emerald-800 font-bold">{searchedResult.registrationNumber}</span>
+                      <div className="flex items-start justify-between border-b border-stone-100 pb-3 gap-3">
+                        <div className="flex items-center gap-3">
+                          {/* 3x4 photo thumbnail in search result */}
+                          <div className="w-12 h-16 rounded-lg border border-stone-300 bg-white p-0.5 shadow-xs overflow-hidden shrink-0 flex items-center justify-center">
+                            {searchedResult.photoUrl ? (
+                              <img src={searchedResult.photoUrl} alt="" className="w-full h-full object-cover rounded" />
+                            ) : (
+                              <div className="w-full h-full flex flex-col items-center justify-center bg-stone-100 text-stone-400">
+                                <User className="w-5 h-5 text-stone-300" />
+                                <span className="text-[7px] font-mono font-bold">3x4</span>
+                              </div>
+                            )}
+                          </div>
+                          <div>
+                            <span className="text-[10px] text-stone-400 font-bold uppercase block">Hasil Ditemukan</span>
+                            <h4 className="text-base font-bold text-stone-900">{searchedResult.fullName}</h4>
+                            <span className="text-xs font-mono text-emerald-800 font-bold">{searchedResult.registrationNumber}</span>
+                          </div>
                         </div>
                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                           searchedResult.status === 'Terverifikasi' 

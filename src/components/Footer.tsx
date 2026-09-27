@@ -11,10 +11,28 @@ import {
   ExternalLink,
   Lock,
   MessageCircle,
-  Users
+  Users,
+  Instagram,
+  Facebook,
+  Youtube,
+  Share2,
+  Sparkles
 } from 'lucide-react';
-import { PESANTREN_INFO } from '../data/pesantrenData.ts';
+import { PESANTREN_INFO, SOCIAL_MEDIA_LIST } from '../data/pesantrenData.ts';
 import { usePesantren } from '../context/PesantrenContext.tsx';
+
+// Crisp SVG Icons for TikTok and Linktree
+const TikTokIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.96-4.48V8.75a8.16 8.16 0 0 0 4.81 1.56v-3.62z"/>
+  </svg>
+);
+
+const LinktreeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M13.736 5.853l4.005-4.117 2.325 2.38-4.2 4.007h5.908v3.305h-5.937l4.229 4.108-2.325 2.38-4.005-4.117v7.974h-3.473v-7.974l-4.005 4.117-2.325-2.38 4.229-4.108h-5.937v-3.305h5.908l-4.2-4.007 2.325-2.38 4.005 4.117v-5.853h3.473v5.853z"/>
+  </svg>
+);
 
 interface FooterProps {
   onOpenPsb: () => void;
@@ -93,7 +111,7 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
 
             <p className="text-xs text-stone-400 leading-relaxed">
-              Lembaga Pendidikan Islam Terpadu yang menyelenggarakan program Tahfidzul Qur'an 30 Juz Mutqin, Pengkajian Kitab Kuning Turats Salafiyah, serta Madrasah Formal (MTs & MA).
+              Lembaga Pendidikan Islam yang menyelenggarakan Pengkajian Kitab Kuning Turats Salafiyah, Pembinaan Mahasantri Mahasiswa, serta Madrasah Diniyah.
             </p>
 
             <div className="p-3.5 rounded-2xl bg-stone-900 border border-stone-800 text-[11px] space-y-1 font-mono">
@@ -254,6 +272,72 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
           </div>
 
+        </div>
+
+        {/* Media Sosial Resmi (Singkat & Rapi) */}
+        <div className="mt-10 pt-6 border-t border-stone-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span className="font-semibold text-stone-300">Media Sosial Santri Mifa:</span>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <a
+              href="https://instagram.com/santri_mifa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-pink-500/50 text-stone-300 hover:text-pink-300 transition-all font-medium"
+              title="Instagram @santri_mifa"
+            >
+              <Instagram className="w-3.5 h-3.5 text-pink-400" />
+              <span>@santri_mifa</span>
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@santri_mifa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-cyan-500/50 text-stone-300 hover:text-cyan-300 transition-all font-medium"
+              title="TikTok @santri_mifa"
+            >
+              <TikTokIcon className="w-3.5 h-3.5 text-cyan-400" />
+              <span>@santri_mifa</span>
+            </a>
+
+            <a
+              href="https://facebook.com/PonpesMiftahulFalah"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-blue-500/50 text-stone-300 hover:text-blue-300 transition-all font-medium"
+              title="Facebook Ponpes Miftahul Falah"
+            >
+              <Facebook className="w-3.5 h-3.5 text-blue-400" />
+              <span>Ponpes Miftahul Falah</span>
+            </a>
+
+            <a
+              href="https://www.youtube.com/@SantriMifaOfficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-red-500/50 text-stone-300 hover:text-red-300 transition-all font-medium"
+              title="YouTube Santri Mifa Official"
+            >
+              <Youtube className="w-3.5 h-3.5 text-red-400" />
+              <span>Santri Mifa Official</span>
+            </a>
+
+            <a
+              href="https://linktr.ee/PonpesMiftahulFalah"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-950 hover:bg-emerald-900 border border-emerald-700/60 hover:border-emerald-500 text-emerald-300 hover:text-emerald-100 transition-all font-bold"
+              title="Linktree Resmi"
+            >
+              <LinktreeIcon className="w-3.5 h-3.5 text-emerald-400" />
+              <span>linktr.ee</span>
+              <ExternalLink className="w-3 h-3 ml-0.5 opacity-70" />
+            </a>
+          </div>
         </div>
 
         {/* Islamic Du'a & Closing */}

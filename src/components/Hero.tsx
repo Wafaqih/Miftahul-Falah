@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  Sparkles, 
   ArrowRight, 
   ShieldCheck, 
   BookOpen, 
@@ -35,25 +34,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenPsb, onOpenFees }) => {
             </span>
           </div>
 
-          {/* Official Badge & Domain Status */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-800/80 border border-amber-400/40 text-amber-300 text-xs font-semibold shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              Penerimaan Santri Baru (PSB) 2026/2027
-            </span>
-            <a 
-              href="#biaya" 
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/60 text-amber-200 text-xs font-bold transition-all shadow-sm"
-            >
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-              <span>Infaq Terjangkau & Penuh Berkah (Rp 120rb/bln)</span>
-            </a>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-700 text-emerald-300 text-xs font-mono">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              {PESANTREN_INFO.domain}
-            </span>
-          </div>
-
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
             Membentuk Generasi <span className="text-amber-400">Qur'ani</span>, Berakhlakul Karimah, & Berwawasan Global
@@ -61,7 +41,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenPsb, onOpenFees }) => {
 
           {/* Subtitle description */}
           <p className="text-base sm:text-lg text-emerald-100/90 max-w-2xl leading-relaxed mx-auto">
-            Pondok Pesantren Miftahul Falah memadukan kedalaman tradisi keilmuan Islam salaf (Kajian Kitab Kuning) dengan kurikulum formal terpadu, tahfidz Al-Qur'an 30 juz bersanad, dan pembinaan karakter mandiri.
+            Pondok Pesantren Miftahul Falah memadukan kedalaman tradisi keilmuan Islam salaf (Kajian Kitab Kuning) dengan pembinaan karakter mandiri serta keselarasan studi akademik perkuliahan.
           </p>
 
           {/* Call to Actions */}
